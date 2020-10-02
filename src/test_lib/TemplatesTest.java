@@ -8,6 +8,7 @@ public class TemplatesTest {
 
 	@Test
 	public void test() {
+		// add some tests here - if possible
 		assertTrue(true);
 	}
 
