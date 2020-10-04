@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ListUtil {
+public class CL_List {
 
 	public static <T> List<T> shuffle(List<T> list) {
 		var shuffledList = new ArrayList<>(list);

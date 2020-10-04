@@ -2,7 +2,7 @@ package lib;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Random {
+public class CL_Random {
 
 	public static int getInclusiveRandom(int min, int max) {
 		return ThreadLocalRandom.current().nextInt(min, max + 1);

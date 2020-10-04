@@ -1,18 +1,18 @@
 package test_lib;
 
-import lib.Random;
+import lib.CL_Random;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class RandomTest {
+public class CL_RandomTest {
 
 	@Test
 	public void getRandom() {
 		var min = 0;
 		var max = 5;
 		for (int i = 0; i < 100; i++) {
-			var result = Random.getInclusiveRandom(min, max);
+			var result = CL_Random.getInclusiveRandom(min, max);
 			assertTrue(result >= min);
 			assertTrue(result <= max);
 		}
@@ -23,7 +23,7 @@ public class RandomTest {
 		var min = 1d;
 		var max = 5d;
 		for (int i = 0; i < 100; i++) {
-			var result = Random.getExclusiveRandom(min, max);
+			var result = CL_Random.getExclusiveRandom(min, max);
 			assertTrue(result >= min);
 			assertTrue(result < max);
 		}
@@ -34,7 +34,7 @@ public class RandomTest {
 		var min = 1;
 		var max = 5;
 		for (int i = 0; i < 100; i++) {
-			var result = Random.getExclusiveRandom(min, max);
+			var result = CL_Random.getExclusiveRandom(min, max);
 			assertTrue(result >= min);
 			assertTrue(result < max);
 		}

@@ -1,6 +1,6 @@
 package test_lib;
 
-import lib.FileHandler;
+import lib.CL_File;
 import org.junit.After;
 import org.junit.Test;
 
@@ -14,10 +14,10 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class FileHandlerTests {
+public class CL_FileTests {
 
 	private final String fileName = "test-file";
-	private final String path = fileName + FileHandler.getFileExtension();
+	private final String path = fileName + CL_File.getFileExtension();
 
 	@After
 	public void clearContentOfFile() throws IOException {
@@ -30,8 +30,8 @@ public class FileHandlerTests {
 	public void setContentOfFile() throws IOException {
 		String content = "test-content";
 
-		FileHandler.setContentOfFile(fileName, content + "other content");
-		FileHandler.setContentOfFile(fileName, content);
+		CL_File.setContentOfFile(fileName, content + "other content");
+		CL_File.setContentOfFile(fileName, content);
 
 		assertTrue(new File(path).isFile());
 
@@ -43,8 +43,8 @@ public class FileHandlerTests {
 	public void setAndGetContentOfFile() {
 		String content = "test-content";
 
-		FileHandler.setContentOfFile(fileName, content);
-		var returnValue = FileHandler.getContentOfFile(fileName);
+		CL_File.setContentOfFile(fileName, content);
+		var returnValue = CL_File.getContentOfFile(fileName);
 
 		assertEquals(content, returnValue);
 	}
@@ -53,24 +53,24 @@ public class FileHandlerTests {
 	public void appendNewLineToFile() {
 		String line = "test-line";
 
-		FileHandler.appendNewLineToFile(fileName, line);
-		FileHandler.appendNewLineToFile(fileName, line);
+		CL_File.appendNewLineToFile(fileName, line);
+		CL_File.appendNewLineToFile(fileName, line);
 
 		var expectedOutput = line + System.lineSeparator() + line + System.lineSeparator();
 
-		assertEquals(expectedOutput, FileHandler.getContentOfFile(fileName));
+		assertEquals(expectedOutput, CL_File.getContentOfFile(fileName));
 	}
 
 	@Test
 	public void appendAndGetLinesGetFile() {
 		String line = "test-line";
 
-		FileHandler.appendNewLineToFile(fileName, line);
-		FileHandler.appendNewLineToFile(fileName, line);
+		CL_File.appendNewLineToFile(fileName, line);
+		CL_File.appendNewLineToFile(fileName, line);
 
 		var expectedOutput = Arrays.asList(line, line);
 
-		assertEquals(expectedOutput, FileHandler.getAllLinesFromFile(fileName));
+		assertEquals(expectedOutput, CL_File.getAllLinesFromFile(fileName));
 	}
 
 }
