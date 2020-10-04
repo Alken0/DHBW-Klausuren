@@ -38,6 +38,7 @@ public class CL_ListTest {
 	public void sortNoParameter() {
 		var input = Arrays.asList(5, 3, 1, 2, 4);
 		var result = CL_List.sort(input);
+		assertEquals(Arrays.asList(5, 3, 1, 2, 4), input);
 		assertEquals(Arrays.asList(1, 2, 3, 4, 5), result);
 	}
 
@@ -45,6 +46,7 @@ public class CL_ListTest {
 	public void sortWithCompareFunction() {
 		var input = Arrays.asList("c", "ab", "lklaf", "sfe");
 		var result = CL_List.sort(input, String::length);
+		assertEquals(Arrays.asList("c", "ab", "lklaf", "sfe"), input);
 		assertEquals(Arrays.asList("c", "ab", "sfe", "lklaf"), result);
 	}
 
@@ -52,6 +54,15 @@ public class CL_ListTest {
 	public void filter() {
 		var input = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 		var result = CL_List.filter(input, i -> i < 5);
+		assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), input);
 		assertEquals(Arrays.asList(1, 2, 3, 4), result);
+	}
+
+	@Test
+	public void map() {
+		var input = Arrays.asList(1, 2, 3, 4);
+		var result = CL_List.map(input, i -> i * 2);
+		assertEquals(Arrays.asList(1, 2, 3, 4), input);
+		assertEquals(Arrays.asList(2, 4, 6, 8), result);
 	}
 }

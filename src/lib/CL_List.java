@@ -35,10 +35,17 @@ public class CL_List {
 				.collect(Collectors.toList());
 	}
 
-	// predicate example: i -> i < 3
+	// filterFunction example: i -> i < 3
 	public static <T> List<T> filter(List<T> list, Predicate<T> filterFunction) {
 		return list.stream()
 				.filter(filterFunction)
+				.collect(Collectors.toList());
+	}
+
+	// mapFunction example: i -> i * 2
+	public static <T> List<T> map(List<T> list, Function<T, ? extends T> mapFunction){
+		return list.stream()
+				.map(mapFunction)
 				.collect(Collectors.toList());
 	}
 }
