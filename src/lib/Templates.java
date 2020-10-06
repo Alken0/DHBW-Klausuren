@@ -1,8 +1,20 @@
 package lib;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class Templates {
+public class Templates extends JFrame {
+
+	private void initFrameSettings() {
+		setTitle("FRAME-TITLE");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBackground(Color.WHITE);
+		// order is important for the following settings!!!
+		pack();
+		setSize(500, 500);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
 
 	public static void ui_actionListener() {
 		// action listener on textarea invokes on enter
