@@ -90,7 +90,7 @@ public class Terminal extends JFrame {
 		setVisible(true);
 	}
 
-	public void updateAuctionTable() {
+	public void update() {
 		for (int i = 0; i < house.getAuctions().size(); i++) {
 			var priceLabel = (JLabel) table.getComponent(i * 5 + 1);
 			priceLabel.setText("" + house.getAuctions().get(i).getPrice());

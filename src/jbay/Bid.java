@@ -9,7 +9,6 @@ public class Bid {
 		this.amount = amount;
 	}
 
-
 	public Person getOwner() {
 		return owner;
 	}
