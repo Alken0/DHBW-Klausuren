@@ -1,6 +1,5 @@
 module exam {
 	requires java.desktop;
-	requires jdk.javadoc;
 	// you still need to download javadoc yourself
 	//intellij: file/project structure/SDKs/<ur_sdk>/documentation_paths
 
