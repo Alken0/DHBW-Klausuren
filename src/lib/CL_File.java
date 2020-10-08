@@ -11,13 +11,16 @@ import java.util.List;
 public class CL_File {
 
 	private final static String fileExtension = ".txt";
+	private final static boolean suppressExceptionOutput = true;
 
 	public static void setContentOfFile(String fileName, String content) {
 		try (BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(fileName + fileExtension))) {
 			bw.write(content);
 		} catch (Exception e) {
-			System.out.println("ERROR in Logger.setContentOfFile()");
-			e.printStackTrace();
+			if (!suppressExceptionOutput) {
+				System.out.println("ERROR in Logger.setContentOfFile()");
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -25,8 +28,10 @@ public class CL_File {
 		try {
 			return Files.readString(Paths.get(fileName + fileExtension));
 		} catch (Exception e) {
-			System.out.println("ERROR in Logger.getContentOfFile()");
-			e.printStackTrace();
+			if (!suppressExceptionOutput) {
+				System.out.println("ERROR in Logger.getContentOfFile()");
+				e.printStackTrace();
+			}
 		}
 		return "";
 	}
@@ -36,8 +41,10 @@ public class CL_File {
 			bw.write(line);
 			bw.newLine();
 		} catch (Exception e) {
-			System.out.println("ERROR in Logger.appendNewLine()");
-			e.printStackTrace();
+			if (!suppressExceptionOutput) {
+				System.out.println("ERROR in Logger.appendNewLine()");
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -48,8 +55,10 @@ public class CL_File {
 				lines.add(br.readLine());
 			}
 		} catch (Exception e) {
-			System.out.println("ERROR in Logger.readAllLinesFromFile()");
-			e.printStackTrace();
+			if (!suppressExceptionOutput) {
+				System.out.println("ERROR in Logger.readAllLinesFromFile()");
+				e.printStackTrace();
+			}
 		}
 		return lines;
 	}
