@@ -3,7 +3,9 @@ package corona;
 import lib.CL_File;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class CoronaWarn {
 
@@ -38,8 +40,7 @@ public class CoronaWarn {
 	 * @param phone phone to clear store for
 	 */
 	public static void clearTokenStore(JPhone phone) {
-		// ADD CODE HERE
-		System.out.println("Clear token store");
+		CL_File.setContentOfFile(phone.getId() + "-tokens", "");
 	}
 
 	/**
@@ -51,13 +52,10 @@ public class CoronaWarn {
 	public static List<Token> loadTokens(JPhone phone) {
 		List<Token> tokens = new LinkedList<>();
 
-		// REPLACE THE FOLLOWING CODE
-		Random rnd = new Random();
-		for (int i = 0; i < 3; i++) {
-			String line = UUID.randomUUID().toString() + ";" + Long.toString(System.currentTimeMillis() - rnd.nextInt(1000000));
+		var content = CL_File.getAllLinesFromFile(phone.getId() + "-tokens");
+		for (var line : content) {
 			tokens.add(parseToken(line));
 		}
-		// END OF CODE TO REPLACE
 
 		return tokens;
 	}

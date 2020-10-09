@@ -1,8 +1,10 @@
 package lib;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -40,7 +42,9 @@ public class CL_File {
 		try (BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(fileName + fileExtension, true))) {
 			bw.write(line);
 			bw.newLine();
-		} catch (Exception e) {
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Bei der Erstellung der Speicherdatei ist etwas " +
+					"schief gegangen :/");
 			if (!suppressExceptionOutput) {
 				System.out.println("ERROR in Logger.appendNewLine()");
 				e.printStackTrace();

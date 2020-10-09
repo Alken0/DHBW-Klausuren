@@ -59,6 +59,7 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 
 	private void setSelfInfected() {
 		status = WarnStatus.INFECTED;
+		CoronaWarnAPI.reportInfection(this);
 		updateStatusLabel();
 		disableAllButtons();
 	}
@@ -96,6 +97,7 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 		var token = new Token();
 		ownTokens.add(token);
 		CoronaWarnAPI.sendToken(this);
+		CoronaWarn.saveToken(phone, token);
 		updateTokenInfo();
 	}
 
