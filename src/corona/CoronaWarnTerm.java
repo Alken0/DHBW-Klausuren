@@ -11,8 +11,9 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 	private final List<Token> receivedTokens = new ArrayList<>();
 	private final List<Token> ownTokens;
 
-
+	private final JLabel statusLabel = new JLabel();
 	private final JLabel tokenInfo = new JLabel();
+	private final JPanel contentPanel = new JPanel();
 
 	public CoronaWarnTerm(JPhone phone) {
 		this.phone = phone;
@@ -26,32 +27,69 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 	}
 
 	private void initComponents() {
-		var statusLabel = new JLabel(this.status.getText());
 		statusLabel.setOpaque(true);
-		statusLabel.setBackground(this.status.getColor());
+		updateStatusLabel();
 		statusLabel.setPreferredSize(new Dimension(0, 100));
 		statusLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(statusLabel);
 
-		var contentPanel = new JPanel();
 		contentPanel.setLayout(new GridLayout(5, 1));
 
 		var newToken = new JButton("New Token");
+		newToken.addActionListener(a -> generateNewToken());
 		contentPanel.add(newToken);
 
 		var checkForInfections = new JButton("Check for infections");
+		checkForInfections.addActionListener(a -> checkStatus());
 		contentPanel.add(checkForInfections);
 
 		var clearTokens = new JButton("Clear tokens");
+		clearTokens.addActionListener(a -> clearTokens());
 		contentPanel.add(clearTokens);
 
 		var reportInfection = new JButton("Report infection");
+		reportInfection.addActionListener(a -> setSelfInfected());
 		contentPanel.add(reportInfection);
 
 		updateTokenInfo();
 		contentPanel.add(tokenInfo);
 
 		add(contentPanel);
+	}
+
+	private void setSelfInfected() {
+		status = WarnStatus.INFECTED;
+		updateStatusLabel();
+		disableAllButtons();
+	}
+
+	private void disableAllButtons() {
+		for (var c : contentPanel.getComponents()) {
+			if (c.getClass().equals(JButton.class)) {
+				c.setEnabled(false);
+			}
+		}
+	}
+
+	private void clearTokens() {
+		ownTokens.clear();
+		receivedTokens.clear();
+		CoronaWarn.clearTokenStore(phone);
+		generateNewToken();
+	}
+
+	private void checkStatus() {
+		if (CoronaWarnAPI.checkInfection(this)) {
+			status = WarnStatus.ALARM;
+		} else {
+			status = WarnStatus.OK;
+		}
+		updateStatusLabel();
+	}
+
+	private void updateStatusLabel() {
+		statusLabel.setText(status.getText());
+		statusLabel.setBackground(status.getColor());
 	}
 
 	private void generateNewToken() {
