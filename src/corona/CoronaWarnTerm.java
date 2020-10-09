@@ -125,16 +125,16 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 
 	@Override
 	public List<Token> getAllTokens() {
-		return null;
+		return ownTokens;
 	}
 
 	@Override
 	public List<Token> getAllSeenTokens() {
-		return null;
+		return receivedTokens;
 	}
 
 	@Override
 	public void tokenReceived(Token token) {
-
+		receivedTokens.add(token);
 	}
 }
