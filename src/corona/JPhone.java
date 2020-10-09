@@ -8,4 +8,12 @@ public class JPhone {
 		this.id = id;
 		this.owner = owner;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
 }
