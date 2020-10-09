@@ -19,11 +19,24 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 		this.phone = phone;
 		ownTokens = CoronaWarn.loadTokens(phone);
 
-		setLayout(new GridLayout(2, 1));
+		setLayout(new GridLayout(2, 1, 0, 5));
 		initComponents();
 		initFrameSettings();
 
-		generateNewToken();
+		initGeneratingTokens();
+	}
+
+	private void initGeneratingTokens() {
+		new Thread(() -> {
+			while (!status.equals(WarnStatus.INFECTED)) {
+				generateNewToken();
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 
 	private void initComponents() {
@@ -33,7 +46,7 @@ public class CoronaWarnTerm extends JFrame implements CoronaWarnClient {
 		statusLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(statusLabel);
 
-		contentPanel.setLayout(new GridLayout(5, 1));
+		contentPanel.setLayout(new GridLayout(5, 1, 0, 5));
 
 		var newToken = new JButton("New Token");
 		newToken.addActionListener(a -> generateNewToken());
