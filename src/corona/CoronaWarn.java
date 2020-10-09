@@ -1,5 +1,7 @@
 package corona;
 
+import lib.CL_File;
+
 import javax.swing.*;
 import java.util.*;
 
@@ -68,8 +70,7 @@ public class CoronaWarn {
 	 */
 	public static void saveToken(JPhone phone, Token token) {
 		String line = token.getValue() + ";" + token.getDate().getTime();
-
-		// ADD CODE HERE
+		CL_File.appendNewLineToFile(phone.getId() + "-tokens", line);
 	}
 
 	/**
